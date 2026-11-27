@@ -22,6 +22,8 @@ jobs:
         with:
           distribution: temurin
           java-version: '21'
+      - name: Validate application JavaScript
+        run: node --check www/src/app.js
       - name: Install dependencies
         run: npm install
       - name: Sync web app
