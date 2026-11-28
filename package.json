@@ -7,7 +7,7 @@
   "license": "UNLICENSED",
   "scripts": {
     "start": "electron .",
-    "dist": "electron-builder --win nsis --publish never",
+    "dist": "electron-builder --win nsis",
     "android:sync": "cap sync android"
   },
   "devDependencies": {
