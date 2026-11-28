@@ -28,9 +28,7 @@ flutter:
 
 flutter_launcher_icons:
   android: true
-  ios: true
   image_path: assets/branding/app_icon.jpg
-  remove_alpha_ios: true
   windows:
     generate: true
     image_path: assets/branding/app_icon.jpg
