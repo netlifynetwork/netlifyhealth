@@ -21,7 +21,7 @@ jobs:
           channel: stable
           cache: true
       - name: Generate native platform runners
-        run: flutter create . --platforms=android,ios,windows,macos,linux --project-name netlify_health
+        run: flutter create . --platforms=android,windows --project-name netlify_health
       - name: Restore supplied app icon
         shell: bash
         run: |
@@ -55,30 +55,6 @@ jobs:
           name: netlify-health-android-apk
           path: build/app/outputs/flutter-apk/app-release.apk
 
-  linux:
-    name: Linux bundle
-    needs: analyze
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: subosito/flutter-action@v2
-        with:
-          channel: stable
-          cache: true
-      - run: sudo apt-get update && sudo apt-get install -y clang cmake ninja-build pkg-config libgtk-3-dev liblzma-dev
-      - run: flutter create . --platforms=linux --project-name netlify_health
-      - name: Restore supplied app icon
-        shell: bash
-        run: |
-          python -c "import base64,pathlib; p=pathlib.Path('assets/branding'); (p/'app_icon.jpg').write_bytes(base64.b64decode((p/'app_icon.jpg.b64').read_text()))"
-      - run: flutter pub get
-      - run: dart run flutter_launcher_icons
-      - run: flutter build linux --release
-      - uses: actions/upload-artifact@v4
-        with:
-          name: netlify-health-linux
-          path: build/linux/x64/release/bundle/
-
   windows:
     name: Windows bundle
     needs: analyze
@@ -101,27 +77,3 @@ jobs:
         with:
           name: netlify-health-windows
           path: build/windows/x64/runner/Release/
-
-  apple:
-    name: iOS and macOS
-    needs: analyze
-    runs-on: macos-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: subosito/flutter-action@v2
-        with:
-          channel: stable
-          cache: true
-      - run: flutter create . --platforms=ios,macos --project-name netlify_health
-      - name: Restore supplied app icon
-        shell: bash
-        run: |
-          python -c "import base64,pathlib; p=pathlib.Path('assets/branding'); (p/'app_icon.jpg').write_bytes(base64.b64decode((p/'app_icon.jpg.b64').read_text()))"
-      - run: flutter pub get
-      - run: dart run flutter_launcher_icons
-      - run: flutter build ios --release --no-codesign
-      - run: flutter build macos --release
-      - uses: actions/upload-artifact@v4
-        with:
-          name: netlify-health-macos-app
-          path: build/macos/Build/Products/Release/
