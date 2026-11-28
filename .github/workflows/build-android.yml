@@ -8,6 +8,7 @@ on:
       - 'package.json'
       - 'capacitor.config.json'
       - 'android/app/build.gradle'
+      - 'android/app/src/**'
       - '.github/workflows/build-android.yml'
 permissions:
   contents: read
