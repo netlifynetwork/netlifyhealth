@@ -1,6 +1,6 @@
 # Netlify Health
 
-A Flutter application targeting Android, iOS/iPadOS, Windows, macOS and Linux. The interface follows the supplied blue-violet gradient / lime-accent design reference. The supplied app mark is stored under `assets/branding/`.
+A Flutter application targeting Android and Windows. The interface follows the supplied blue-violet gradient / lime-accent design reference. The supplied app mark is stored under `assets/branding/`.
 
 ## Current architecture
 
@@ -32,7 +32,7 @@ The app intentionally shows a configuration screen until valid Supabase settings
 Install the current stable Flutter SDK, then from this directory:
 
 ```bash
-flutter create . --platforms=android,ios,windows,macos,linux --project-name netlify_health
+flutter create . --platforms=android,windows --project-name netlify_health
 python -c "import base64,pathlib; p=pathlib.Path('assets/branding'); (p/'app_icon.jpg').write_bytes(base64.b64decode((p/'app_icon.jpg.b64').read_text()))"
 flutter pub get
 dart run flutter_launcher_icons
@@ -46,17 +46,14 @@ flutter run --dart-define=SUPABASE_URL=... --dart-define=SUPABASE_PUBLISHABLE_KE
 ```bash
 flutter build apk --release
 flutter build appbundle --release
-flutter build ios --release --no-codesign
 flutter build windows --release
-flutter build macos --release
-flutter build linux --release
 ```
 
 iOS/iPadOS and macOS builds require macOS with Xcode. App Store distribution additionally requires Apple signing and an Apple Developer account. Windows builds require Windows + Visual Studio with the Desktop development with C++ workload. Linux builds require the Flutter Linux desktop prerequisites. Android release distribution should be signed with a private keystore; keep signing secrets in GitHub Actions secrets, never in git.
 
 ## CI
 
-GitHub Actions runs formatting, analysis and tests, then builds Android, Linux, Windows, iOS and macOS artifacts on the matching hosted runners. iOS CI is an unsigned build and is not an App Store-ready IPA. Artifacts are available from the Actions run after jobs succeed.
+GitHub Actions runs formatting, analysis and tests, then builds Android APK and Windows release bundle artifacts. iOS, iPadOS, macOS and Linux are not included in this project target. Artifacts are available from the Actions run after jobs succeed.
 
 ## Nutrition and health data
 
