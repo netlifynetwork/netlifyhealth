@@ -26,8 +26,8 @@ jobs:
         shell: bash
         run: |
           python -c "import base64,pathlib; p=pathlib.Path('assets/branding'); (p/'app_icon.jpg').write_bytes(base64.b64decode((p/'app_icon.jpg.b64').read_text()))"
-      - run: dart run flutter_launcher_icons
       - run: flutter pub get
+      - run: dart run flutter_launcher_icons
       - run: dart format --output=none --set-exit-if-changed lib test
       - run: flutter analyze
       - run: flutter test
@@ -47,8 +47,8 @@ jobs:
         shell: bash
         run: |
           python -c "import base64,pathlib; p=pathlib.Path('assets/branding'); (p/'app_icon.jpg').write_bytes(base64.b64decode((p/'app_icon.jpg.b64').read_text()))"
-      - run: dart run flutter_launcher_icons
       - run: flutter pub get
+      - run: dart run flutter_launcher_icons
       - run: flutter build apk --release
       - uses: actions/upload-artifact@v4
         with:
@@ -71,8 +71,8 @@ jobs:
         shell: bash
         run: |
           python -c "import base64,pathlib; p=pathlib.Path('assets/branding'); (p/'app_icon.jpg').write_bytes(base64.b64decode((p/'app_icon.jpg.b64').read_text()))"
-      - run: dart run flutter_launcher_icons
       - run: flutter pub get
+      - run: dart run flutter_launcher_icons
       - run: flutter build linux --release
       - uses: actions/upload-artifact@v4
         with:
@@ -94,8 +94,8 @@ jobs:
         shell: bash
         run: |
           python -c "import base64,pathlib; p=pathlib.Path('assets/branding'); (p/'app_icon.jpg').write_bytes(base64.b64decode((p/'app_icon.jpg.b64').read_text()))"
-      - run: dart run flutter_launcher_icons
       - run: flutter pub get
+      - run: dart run flutter_launcher_icons
       - run: flutter build windows --release
       - uses: actions/upload-artifact@v4
         with:
@@ -117,8 +117,8 @@ jobs:
         shell: bash
         run: |
           python -c "import base64,pathlib; p=pathlib.Path('assets/branding'); (p/'app_icon.jpg').write_bytes(base64.b64decode((p/'app_icon.jpg.b64').read_text()))"
-      - run: dart run flutter_launcher_icons
       - run: flutter pub get
+      - run: dart run flutter_launcher_icons
       - run: flutter build ios --release --no-codesign
       - run: flutter build macos --release
       - uses: actions/upload-artifact@v4
