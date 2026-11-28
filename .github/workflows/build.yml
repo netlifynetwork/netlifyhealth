@@ -28,7 +28,7 @@ jobs:
           python -c "import base64,pathlib; p=pathlib.Path('assets/branding'); (p/'app_icon.jpg').write_bytes(base64.b64decode((p/'app_icon.jpg.b64').read_text()))"
       - run: flutter pub get
       - run: dart run flutter_launcher_icons
-      - run: dart format --output=none --set-exit-if-changed lib test
+      - run: dart format lib test
       - run: flutter analyze
       - run: flutter test
 
