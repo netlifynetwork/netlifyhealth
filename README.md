@@ -33,7 +33,9 @@ Install the current stable Flutter SDK, then from this directory:
 
 ```bash
 flutter create . --platforms=android,ios,windows,macos,linux --project-name netlify_health
+python -c "import base64,pathlib; p=pathlib.Path('assets/branding'); (p/'app_icon.jpg').write_bytes(base64.b64decode((p/'app_icon.jpg.b64').read_text()))"
 flutter pub get
+dart run flutter_launcher_icons
 flutter analyze
 flutter test
 flutter run --dart-define=SUPABASE_URL=... --dart-define=SUPABASE_PUBLISHABLE_KEY=...
