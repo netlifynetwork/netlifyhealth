@@ -13,7 +13,7 @@ const bg = Color(0xFFF3F5FC);
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   if (supabaseUrl.isNotEmpty && supabaseKey.isNotEmpty) {
-    await Supabase.initialize(url: supabaseUrl, anonKey: supabaseKey);
+    await Supabase.initialize(url: supabaseUrl, publishableKey: supabaseKey);
   }
   runApp(const NetlifyHealthApp());
 }
@@ -211,6 +211,15 @@ class _ProfileSetupPageState extends State<ProfileSetupPage> {
         'user_id': widget.userId, 'measured_on': DateFormat('yyyy-MM-dd').format(DateTime.now()),
         'weight_kg': w, 'note': 'Starting weight',
       }, onConflict: 'user_id,measured_on');
+      if (mounted) {
+        Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_) => HealthShell(profile: {
+          'user_id': widget.userId, 'full_name': name.text.trim(),
+          'birth_date': DateFormat('yyyy-MM-dd').format(birth), 'height_cm': h,
+          'current_weight_kg': w, 'goal': goal, 'activity_level': activity,
+          'dietary_preference': diet, 'allergies': allergies.text.trim(),
+          'calorie_goal': c, 'water_goal_ml': 2000,
+        })));
+      }
     } on FormatException catch (e) { setState(() => error = e.message); }
       catch (e) { setState(() => error = 'Profile could not be saved. Check your connection and database setup.'); }
     finally { if (mounted) setState(() => busy = false); }
