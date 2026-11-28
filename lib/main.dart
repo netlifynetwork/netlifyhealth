@@ -13,7 +13,7 @@ const bg = Color(0xFFF3F5FC);
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   if (supabaseUrl.isNotEmpty && supabaseKey.isNotEmpty) {
-    await Supabase.initialize(url: supabaseUrl, anonKey: supabaseKey);
+    await Supabase.initialize(url: supabaseUrl, publishableKey: supabaseKey);
   }
   runApp(const NetlifyHealthApp());
 }
@@ -51,9 +51,9 @@ class SetupRequiredPage extends StatelessWidget {
       child: ConstrainedBox(constraints: BoxConstraints(maxWidth: 520), child: Column(
         mainAxisSize: MainAxisSize.min, crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          BrandMark(), SizedBox(height: 24),
+          BrandMark(), const SizedBox(height: 24),
           Text('Connect your health space', style: TextStyle(fontSize: 28, fontWeight: FontWeight.w800, color: ink)),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           Text('Netlify Health needs your Supabase project URL and publishable key to securely create accounts and save health records. Configure SUPABASE_URL and SUPABASE_PUBLISHABLE_KEY using --dart-define. The app will not create pretend accounts or sample records.', style: TextStyle(height: 1.55, color: Color(0xFF59627B))),
         ],
       )),
@@ -101,10 +101,10 @@ class ErrorPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Scaffold(body: Center(child: Padding(
     padding: const EdgeInsets.all(24), child: Column(mainAxisSize: MainAxisSize.min, children: [
-      const Icon(Icons.cloud_off_rounded, size: 48, color: blue), const SizedBox(height: 16),
+      const Icon(Icons.cloud_off_rounded, size: 48, color: blue), const const SizedBox(height: 16),
       const Text('Something needs attention', style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
-      const SizedBox(height: 8), Text(message, textAlign: TextAlign.center),
-      const SizedBox(height: 16), FilledButton(onPressed: onRetry, child: const Text('Try again')),
+      const const SizedBox(height: 8), Text(message, textAlign: TextAlign.center),
+      const const SizedBox(height: 16), FilledButton(onPressed: onRetry, child: const Text('Try again')),
     ]),
   )));
 }
@@ -157,15 +157,15 @@ class _AuthPageState extends State<AuthPage> {
             padding: const EdgeInsets.all(26), decoration: BoxDecoration(
               color: Colors.white.withValues(alpha: .94), borderRadius: BorderRadius.circular(30)),
             child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              const BrandMark(), const SizedBox(height: 24),
+              const BrandMark(), const const SizedBox(height: 24),
               Text(register ? 'Create your account' : 'Welcome back', style: const TextStyle(fontSize: 28, fontWeight: FontWeight.w800, color: ink)),
-              const SizedBox(height: 8), Text(register ? 'Start building healthier everyday habits.' : 'Your health journey continues here.', style: const TextStyle(color: Color(0xFF66708A))),
-              const SizedBox(height: 24), const Text('Email address'),
-              const SizedBox(height: 7), TextField(controller: email, keyboardType: TextInputType.emailAddress, decoration: const InputDecoration(hintText: 'you@example.com')),
-              const SizedBox(height: 16), const Text('Password'),
-              const SizedBox(height: 7), TextField(controller: password, obscureText: true, decoration: const InputDecoration(hintText: 'At least 8 characters')),
+              const const SizedBox(height: 8), Text(register ? 'Start building healthier everyday habits.' : 'Your health journey continues here.', style: const TextStyle(color: Color(0xFF66708A))),
+              const const SizedBox(height: 24), const Text('Email address'),
+              const const SizedBox(height: 7), TextField(controller: email, keyboardType: TextInputType.emailAddress, decoration: const InputDecoration(hintText: 'you@example.com')),
+              const const SizedBox(height: 16), const Text('Password'),
+              const const SizedBox(height: 7), TextField(controller: password, obscureText: true, decoration: const InputDecoration(hintText: 'At least 8 characters')),
               if (error != null) Padding(padding: const EdgeInsets.only(top: 12), child: Text(error!, style: const TextStyle(color: Colors.red))),
-              const SizedBox(height: 22), SizedBox(width: double.infinity, child: FilledButton(
+              const const SizedBox(height: 22), SizedBox(width: double.infinity, child: FilledButton(
                 onPressed: busy ? null : submit, style: FilledButton.styleFrom(backgroundColor: ink, padding: const EdgeInsets.all(17)),
                 child: busy ? const SizedBox(width: 20, height: 20, child: CircularProgressIndicator(strokeWidth: 2, color: Colors.white)) : Text(register ? 'Create account' : 'Sign in'),
               )),
@@ -228,13 +228,13 @@ class _ProfileSetupPageState extends State<ProfileSetupPage> {
   void dispose() { name.dispose(); height.dispose(); weight.dispose(); calories.dispose(); allergies.dispose(); super.dispose(); }
   Widget field(String label, TextEditingController c, {TextInputType type = TextInputType.text}) => Padding(
     padding: const EdgeInsets.only(bottom: 14), child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      Text(label, style: const TextStyle(fontWeight: FontWeight.w600)), const SizedBox(height: 7),
+      Text(label, style: const TextStyle(fontWeight: FontWeight.w600)), const const SizedBox(height: 7),
       TextField(controller: c, keyboardType: type, decoration: InputDecoration(hintText: label)),
     ]),
   );
   Widget picker(String label, String value, List<String> values, ValueChanged<String?> change) => Padding(
     padding: const EdgeInsets.only(bottom: 14), child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      Text(label, style: const TextStyle(fontWeight: FontWeight.w600)), const SizedBox(height: 7),
+      Text(label, style: const TextStyle(fontWeight: FontWeight.w600)), const const SizedBox(height: 7),
       DropdownButtonFormField<String>(value: value, items: values.map((v) => DropdownMenuItem(value: v, child: Text(v))).toList(), onChanged: change),
     ]),
   );
@@ -244,17 +244,17 @@ class _ProfileSetupPageState extends State<ProfileSetupPage> {
       child: Padding(padding: const EdgeInsets.all(22), child: Card(
         elevation: 0, shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(28)),
         child: Padding(padding: const EdgeInsets.all(24), child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          const BrandMark(), const SizedBox(height: 20),
+          const BrandMark(), const const SizedBox(height: 20),
           const Text('Complete your profile', style: TextStyle(fontSize: 27, fontWeight: FontWeight.w800, color: ink)),
-          const SizedBox(height: 6), const Text('These details help tailor your daily nutrition and activity goals. Every field is required.'),
-          const SizedBox(height: 22),
+          const const SizedBox(height: 6), const Text('These details help tailor your daily nutrition and activity goals. Every field is required.'),
+          const const SizedBox(height: 22),
           field('Full name', name),
-          const Text('Date of birth', style: TextStyle(fontWeight: FontWeight.w600)), const SizedBox(height: 7),
+          const Text('Date of birth', style: TextStyle(fontWeight: FontWeight.w600)), const const SizedBox(height: 7),
           OutlinedButton.icon(onPressed: () async {
             final d = await showDatePicker(context: context, initialDate: birth, firstDate: DateTime(1920), lastDate: DateTime.now());
             if (d != null) setState(() => birth = d);
           }, icon: const Icon(Icons.calendar_month), label: Text(DateFormat('d MMMM yyyy').format(birth))),
-          const SizedBox(height: 14),
+          const const SizedBox(height: 14),
           field('Height (cm)', height, type: TextInputType.number),
           field('Current weight (kg)', weight, type: const TextInputType.numberWithOptions(decimal: true)),
           picker('Your goal', goal, ['Lose weight','Maintain weight','Gain weight','Improve fitness'], (v) => setState(() => goal = v!)),
@@ -367,7 +367,7 @@ class MetricCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Panel(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
     Row(children: [Icon(icon, color: blue), const Spacer(), Text(unit, style: const TextStyle(color: Colors.black45))]),
-    const SizedBox(height: 14), Text(value, style: const TextStyle(fontSize: 25, fontWeight: FontWeight.w800, color: ink)),
+    const const SizedBox(height: 14), Text(value, style: const TextStyle(fontSize: 25, fontWeight: FontWeight.w800, color: ink)),
     Text(label, style: const TextStyle(color: Color(0xFF707A91))),
     if (progress != null) Padding(padding: const EdgeInsets.only(top: 12), child: LinearProgressIndicator(value: progress!.clamp(0,1), minHeight: 7, borderRadius: BorderRadius.circular(8), color: lime, backgroundColor: bg)),
   ]));
@@ -409,10 +409,10 @@ class DashboardPage extends StatelessWidget {
                 MetricCard(label:'Activity',value:'$mins min',unit:'$steps steps logged',icon:Icons.directions_walk),
               ]);
             }),
-            const SizedBox(height:16),
+            const const SizedBox(height:16),
             Panel(child: Column(crossAxisAlignment:CrossAxisAlignment.start,children:[
               const Text('Your daily plan',style:TextStyle(fontSize:19,fontWeight:FontWeight.w800,color:ink)),
-              const SizedBox(height:12),
+              const const SizedBox(height:12),
               for (final item in [('Meals','Log breakfast, lunch, dinner and snacks',1,Icons.restaurant_menu),('Water','Keep your hydration on track',2,Icons.water_drop),('Activity','Record movement and exercise',3,Icons.directions_run)])
                 ListTile(contentPadding:EdgeInsets.zero,leading:CircleAvatar(backgroundColor:const Color(0xFFEDEEFF),child:Icon(item.$4,color:blue)),title:Text(item.$1,style:const TextStyle(fontWeight:FontWeight.w700)),subtitle:Text(item.$2),trailing:const Icon(Icons.arrow_forward_ios,size:15),onTap:()=>onOpen(item.$3)),
             ])),
@@ -462,14 +462,14 @@ class _MealsPageState extends State<MealsPage> {
           return Column(children:[
             Panel(child:Column(crossAxisAlignment:CrossAxisAlignment.start,children:[
               const Text('Today’s nutrition',style:TextStyle(fontSize:19,fontWeight:FontWeight.w800,color:ink)),
-              const SizedBox(height:12),Wrap(spacing:24,runSpacing:12,children:[
+              const const SizedBox(height:12),Wrap(spacing:24,runSpacing:12,children:[
                 Text('$total kcal',style:const TextStyle(fontSize:24,fontWeight:FontWeight.w800,color:blue)),
                 Text('Protein ${p.toStringAsFixed(0)} g'),Text('Carbs ${c.toStringAsFixed(0)} g'),Text('Fat ${fat.toStringAsFixed(0)} g'),
               ]),
-              const SizedBox(height:10),LinearProgressIndicator(value:(total/(widget.profile['calorie_goal'] as num)).clamp(0,1),color:lime,backgroundColor:bg,minHeight:8,borderRadius:BorderRadius.circular(8)),
+              const const SizedBox(height:10),LinearProgressIndicator(value:(total/(widget.profile['calorie_goal'] as num)).clamp(0,1),color:lime,backgroundColor:bg,minHeight:8,borderRadius:BorderRadius.circular(8)),
               Text('Goal: ${widget.profile['calorie_goal']} kcal',style:const TextStyle(color:Colors.black54)),
             ])),
-            const SizedBox(height:16),
+            const const SizedBox(height:16),
             for(final type in types) ...[
               Align(alignment:Alignment.centerLeft,child:Padding(padding:const EdgeInsets.only(bottom:8,top:8),child:Text(type,style:const TextStyle(fontSize:18,fontWeight:FontWeight.w800,color:ink)))),
               ...foods.where((f)=>f.type==type).map((f)=>Panel(child:Row(children:[
@@ -486,7 +486,7 @@ class _MealsPageState extends State<MealsPage> {
             if(logs.isNotEmpty) Align(alignment:Alignment.centerRight,child:TextButton.icon(onPressed:()=>showModalBottomSheet(context:context,builder:(_)=>SafeArea(child:ListView(children:logs.map((m)=>ListTile(title:Text(m['food_name']),subtitle:Text('${m['calories']} kcal'))).toList()))),icon:const Icon(Icons.history),label:const Text('Today’s meal log'))),
           ]);
         }),
-      const SizedBox(height:10),const Text('Nutrition values are estimates. Check food labels and ingredients, especially if you have allergies or dietary restrictions.',style:TextStyle(fontSize:12,color:Colors.black54)),
+      const const SizedBox(height:10),const Text('Nutrition values are estimates. Check food labels and ingredients, especially if you have allergies or dietary restrictions.',style:TextStyle(fontSize:12,color:Colors.black54)),
     ]));
   }
 }
@@ -509,13 +509,13 @@ class _WaterPageState extends State<WaterPage>{
           final logs=s.data!,total=logs.fold<int>(0,(a,x)=>a+(x['amount_ml'] as num).toInt());
           return Column(children:[
             Panel(child:Column(children:[
-              const Icon(Icons.water_drop_rounded,color:blue,size:58),const SizedBox(height:8),
+              const Icon(Icons.water_drop_rounded,color:blue,size:58),const const SizedBox(height:8),
               Text('${(total/1000).toStringAsFixed(2)} L',style:const TextStyle(fontSize:36,fontWeight:FontWeight.w800,color:ink)),
               Text('of ${(goal/1000).toStringAsFixed(1)} L daily goal',style:const TextStyle(color:Colors.black54)),
-              const SizedBox(height:18),ClipRRect(borderRadius:BorderRadius.circular(12),child:LinearProgressIndicator(value:(total/goal).clamp(0,1),minHeight:14,color:lime,backgroundColor:bg)),
-              const SizedBox(height:18),Wrap(spacing:10,runSpacing:10,children:[for(final ml in [150,250,350,500])FilledButton.tonal(onPressed:()=>add(ml),child:Text('+$ml ml'))]),
+              const const SizedBox(height:18),ClipRRect(borderRadius:BorderRadius.circular(12),child:LinearProgressIndicator(value:(total/goal).clamp(0,1),minHeight:14,color:lime,backgroundColor:bg)),
+              const const SizedBox(height:18),Wrap(spacing:10,runSpacing:10,children:[for(final ml in [150,250,350,500])FilledButton.tonal(onPressed:()=>add(ml),child:Text('+$ml ml'))]),
             ])),
-            const SizedBox(height:16),Panel(child:Column(crossAxisAlignment:CrossAxisAlignment.start,children:[
+            const const SizedBox(height:16),Panel(child:Column(crossAxisAlignment:CrossAxisAlignment.start,children:[
               const Text('Today’s entries',style:TextStyle(fontWeight:FontWeight.w800,fontSize:18)),
               if(logs.isEmpty)const Padding(padding:EdgeInsets.all(12),child:Text('No water logged yet. Add your first glass above.')),
               for(final x in logs.reversed)ListTile(contentPadding:EdgeInsets.zero,leading:const Icon(Icons.water_drop,color:blue),title:Text('${x['amount_ml']} ml'),subtitle:Text(DateFormat('h:mm a').format(DateTime.parse(x['created_at']).toLocal()))),
@@ -541,15 +541,15 @@ class _ActivityPageState extends State<ActivityPage>{
    const SectionTitle('Activity',subtitle:'Record movement and exercise. Device step integrations are not connected yet.'),
    Panel(child:Column(crossAxisAlignment:CrossAxisAlignment.start,children:[
     const Text('Add an activity',style:TextStyle(fontWeight:FontWeight.w800,fontSize:19)),
-    const SizedBox(height:12),TextField(controller:name,decoration:const InputDecoration(labelText:'Activity name')),
-    const SizedBox(height:10),Wrap(spacing:10,runSpacing:10,children:[
+    const const SizedBox(height:12),TextField(controller:name,decoration:const InputDecoration(labelText:'Activity name')),
+    const const SizedBox(height:10),Wrap(spacing:10,runSpacing:10,children:[
       SizedBox(width:130,child:TextField(controller:minutes,keyboardType:TextInputType.number,decoration:const InputDecoration(labelText:'Minutes'))),
       SizedBox(width:130,child:TextField(controller:steps,keyboardType:TextInputType.number,decoration:const InputDecoration(labelText:'Steps'))),
       SizedBox(width:150,child:TextField(controller:burned,keyboardType:TextInputType.number,decoration:const InputDecoration(labelText:'Calories burned'))),
     ]),
-    const SizedBox(height:12),FilledButton(onPressed:add,child:const Text('Save activity')),
+    const const SizedBox(height:12),FilledButton(onPressed:add,child:const Text('Save activity')),
    ])),
-   const SizedBox(height:16),FutureBuilder<List<Map<String,dynamic>>>(future:Supabase.instance.client.from('activity_logs').select().eq('user_id',uid).eq('logged_on',today).order('created_at',ascending:false),
+   const const SizedBox(height:16),FutureBuilder<List<Map<String,dynamic>>>(future:Supabase.instance.client.from('activity_logs').select().eq('user_id',uid).eq('logged_on',today).order('created_at',ascending:false),
     builder:(context,s){if(s.hasError)return Panel(child:Text('Could not load activity: ${s.error}'));if(!s.hasData)return const Center(child:CircularProgressIndicator());final rows=s.data!,mins=rows.fold<int>(0,(a,x)=>a+(x['duration_minutes'] as num).toInt()),st=rows.fold<int>(0,(a,x)=>a+(x['steps'] as num).toInt());
      return Panel(child:Column(crossAxisAlignment:CrossAxisAlignment.start,children:[
       Text('$mins minutes active',style:const TextStyle(fontSize:24,fontWeight:FontWeight.w800,color:ink)),Text('$st steps recorded today'),
@@ -573,10 +573,10 @@ class _ProgressPageState extends State<ProgressPage>{
   return PagePad(child:Column(crossAxisAlignment:CrossAxisAlignment.start,children:[
    const SectionTitle('Your progress',subtitle:'Review your weight history and build consistent habits.'),
    Panel(child:Column(crossAxisAlignment:CrossAxisAlignment.start,children:[
-    const Text('Log your weight',style:TextStyle(fontSize:19,fontWeight:FontWeight.w800)),const SizedBox(height:10),
+    const Text('Log your weight',style:TextStyle(fontSize:19,fontWeight:FontWeight.w800)),const const SizedBox(height:10),
     Row(children:[Expanded(child:TextField(controller:weight,keyboardType:const TextInputType.numberWithOptions(decimal:true),decoration:const InputDecoration(labelText:'Weight in kg'))),const SizedBox(width:10),FilledButton(onPressed:save,child:const Text('Save'))]),
    ])),
-   const SizedBox(height:16),FutureBuilder<List<Map<String,dynamic>>>(future:Supabase.instance.client.from('weight_entries').select().eq('user_id',uid).order('measured_on',ascending:false).limit(90),
+   const const SizedBox(height:16),FutureBuilder<List<Map<String,dynamic>>>(future:Supabase.instance.client.from('weight_entries').select().eq('user_id',uid).order('measured_on',ascending:false).limit(90),
     builder:(context,s){if(s.hasError)return Panel(child:Text('Could not load progress: ${s.error}'));if(!s.hasData)return const Center(child:CircularProgressIndicator());final rows=s.data!;
      return Panel(child:Column(crossAxisAlignment:CrossAxisAlignment.start,children:[
       const Text('Weight history',style:TextStyle(fontSize:19,fontWeight:FontWeight.w800)),
@@ -594,7 +594,7 @@ class ProfilePage extends StatelessWidget{
   const SectionTitle('Profile & settings',subtitle:'Your personal health preferences and account controls.'),
   Panel(child:Column(crossAxisAlignment:CrossAxisAlignment.start,children:[
    Text(profile['full_name'],style:const TextStyle(fontSize:22,fontWeight:FontWeight.w800,color:ink)),
-   const SizedBox(height:12),
+   const const SizedBox(height:12),
    for(final row in [
     ('Date of birth',profile['birth_date']),('Height','${profile['height_cm']} cm'),('Current weight','${profile['current_weight_kg']} kg'),
     ('Goal',profile['goal']),('Activity level',profile['activity_level']),('Diet',profile['dietary_preference']),
@@ -606,6 +606,6 @@ class ProfilePage extends StatelessWidget{
    ListTile(contentPadding:EdgeInsets.zero,leading:const Icon(Icons.privacy_tip_outlined),title:const Text('Privacy & data'),subtitle:const Text('Your cloud records are protected by Supabase row-level security.')),
    ListTile(contentPadding:EdgeInsets.zero,leading:const Icon(Icons.logout),title:const Text('Sign out'),onTap:()=>Supabase.instance.client.auth.signOut()),
   ])),
-  const SizedBox(height:12),const Text('Netlify Health provides wellness tracking and is not a medical device. For diagnosis or treatment, consult a qualified healthcare professional.',style:TextStyle(fontSize:12,color:Colors.black54)),
+  const const SizedBox(height:12),const Text('Netlify Health provides wellness tracking and is not a medical device. For diagnosis or treatment, consult a qualified healthcare professional.',style:TextStyle(fontSize:12,color:Colors.black54)),
  ]));
 }
