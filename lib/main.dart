@@ -13,7 +13,7 @@ const bg = Color(0xFFF3F5FC);
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   if (supabaseUrl.isNotEmpty && supabaseKey.isNotEmpty) {
-    await Supabase.initialize(url: supabaseUrl, publishableKey: supabaseKey);
+    await Supabase.initialize(url: supabaseUrl, anonKey: supabaseKey);
   }
   runApp(const NetlifyHealthApp());
 }
