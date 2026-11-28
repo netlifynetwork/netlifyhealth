@@ -1,6 +1,6 @@
 {
   "name": "netlify-health",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Netlify Health desktop wellness companion",
   "main": "main.cjs",
   "author": "Netlify Network",
