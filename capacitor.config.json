@@ -1,9 +1,0 @@
-{
-  "appId": "com.netlifynetwork.health",
-  "appName": "Netlify Health",
-  "webDir": "www",
-  "bundledWebRuntime": false,
-  "server": {
-    "androidScheme": "https"
-  }
-}
