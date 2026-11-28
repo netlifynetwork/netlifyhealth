@@ -27,7 +27,6 @@ jobs:
         run: |
           python -c "import base64,pathlib; p=pathlib.Path('assets/branding'); (p/'app_icon.jpg').write_bytes(base64.b64decode((p/'app_icon.jpg.b64').read_text()))"
       - run: flutter pub get
-      - run: dart run flutter_launcher_icons
       - run: dart format lib test
       - run: flutter analyze --no-fatal-infos
       - run: flutter test
@@ -48,6 +47,7 @@ jobs:
         run: |
           python -c "import base64,pathlib; p=pathlib.Path('assets/branding'); (p/'app_icon.jpg').write_bytes(base64.b64decode((p/'app_icon.jpg.b64').read_text()))"
       - run: flutter pub get
+      - run: dart run flutter_launcher_icons -f flutter_launcher_icons-android.yaml
       - run: flutter build apk --release
       - uses: actions/upload-artifact@v4
         with:
@@ -70,7 +70,7 @@ jobs:
         run: |
           python -c "import base64,pathlib; p=pathlib.Path('assets/branding'); (p/'app_icon.jpg').write_bytes(base64.b64decode((p/'app_icon.jpg.b64').read_text()))"
       - run: flutter pub get
-      - run: dart run flutter_launcher_icons
+      - run: dart run flutter_launcher_icons -f flutter_launcher_icons-windows.yaml
       - run: flutter build windows --release
       - uses: actions/upload-artifact@v4
         with:
