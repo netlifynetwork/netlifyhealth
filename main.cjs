@@ -19,6 +19,7 @@ app.whenReady().then(()=>{
  setTimeout(check,8000);setInterval(check,6*60*60*1000);
  app.on('activate',()=>{if(BrowserWindow.getAllWindows().length===0)createWindow()});
 });
+ipcMain.handle('app:version',()=>app.getVersion());
 ipcMain.handle('updates:check',async()=>{if(!app.isPackaged)return {available:false,development:true};try{const r=await autoUpdater.checkForUpdates();return {available:!!(r&&r.updateInfo&&r.updateInfo.version!==app.getVersion()),version:r?.updateInfo?.version||null}}catch(e){return {error:String(e.message||e)}}});
 ipcMain.handle('updates:download',async()=>{try{await autoUpdater.downloadUpdate();return {started:true}}catch(e){return {error:String(e.message||e)}}});
 ipcMain.handle('updates:install',()=>{autoUpdater.quitAndInstall(false,true);return {started:true}});
