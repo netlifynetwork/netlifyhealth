@@ -24,6 +24,7 @@ public class MainActivity extends Activity {
  private BroadcastReceiver completedReceiver;
  private static final int INSTALL_PERMISSION_REQUEST=7021;
  public class AndroidUpdater {
+  @JavascriptInterface public String getVersion(){return BuildConfig.VERSION_NAME;}
   @JavascriptInterface public void downloadAndInstall(String url){
    runOnUiThread(()->{
     if(url==null||!url.startsWith("https://github.com/netlifynetwork/netlifyhealth/releases/download/")){
