@@ -7,6 +7,7 @@ on:
       - 'www/**'
       - 'package.json'
       - 'capacitor.config.json'
+      - 'android/app/build.gradle'
       - '.github/workflows/build-android.yml'
 permissions:
   contents: read
