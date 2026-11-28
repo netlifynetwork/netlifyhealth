@@ -45,7 +45,7 @@ class NetlifyHealthApp extends StatelessWidget {
 class SetupRequiredPage extends StatelessWidget {
   const SetupRequiredPage({super.key});
   @override
-  Widget build(BuildContext context) => const Scaffold(
+  Widget build(BuildContext context) => Scaffold(
     body: Center(child: Padding(
       padding: EdgeInsets.all(28),
       child: ConstrainedBox(constraints: BoxConstraints(maxWidth: 520), child: Column(
